@@ -1,6 +1,5 @@
 # Robot-Vision
-3D printed robot controlled programmatically. 
-[Currently Working...]
+3D printed robot controlled programmatically. [Currently Working...]
 
 ## Todo
 ### Head
