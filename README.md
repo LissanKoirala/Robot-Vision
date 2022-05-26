@@ -1,5 +1,6 @@
-# Robot-Vision
-3D printed robot controlled programmatically. [Currently Working...]
+# Robot-Vision 🤖 
+3D printed robot controlled programmatically. Summer school project [Currently Working...]
+
 
 ## Todo
 ### Head
