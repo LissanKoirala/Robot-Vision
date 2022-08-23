@@ -17,6 +17,24 @@ import math
 import ai
 import time
 
+def motorAngle(x,y,w,h):
+    cameraResolution = (640, 480)
+
+    allowedCrownAngle = (44, 140)
+    allowedThroatAngle = (80, 170)
+
+    magicNumberX = (allowedCrownAngle[1]-allowedCrownAngle[0]) / cameraResolution[0]
+    magicNumberY = (allowedThroatAngle[1]-allowedThroatAngle[0]) / cameraResolution[1] 
+
+
+
+    newCrownAngle = (x*magicNumberX)+ allowedCrownAngle[0] + 0.5*w*magicNumberX
+    newThroatAngle = (allowedThroatAngle[1]-(y*magicNumberY)) -0.5*h*magicNumberY
+
+    print("New CrownAngle: " + str(newCrownAngle))
+    print("New ThroatAngle: " + str(newThroatAngle))
+
+    return newCrownAngle, newThroatAngle
 
 SERVO_ENABLE = True
 
@@ -182,10 +200,28 @@ class Head:
             newCrownAngle = 140
             newRNeckAngle = 45
             newLNeckAngle = 135
+            
         if pose == "facial recognition [PRE-ALPHA]":
-            newCrownAngle, newThroatAngle = ai.face_rec()
+            
+            V_0 = unit.get(unit.V_FUNCTION, unit.PORTB)
+
+            data_detail = None
+
+            face = V_0.init(V_0.FACE_DETECT)
+            # print((str('FaceNumber: ') + str((face.getFaceNumber()))))
+            data_detail = face.getFaceDetail(1)
+            # print((str('Face1 value: ') + str(((str(("%.2f"%((data_detail[0] * 100)))) + str('%'))))))
+            x = data_detail[1]
+            y = data_detail[2]
+            w = data_detail[3]
+            h = data_detail[4]
+            
+            
+            newCrownAngle, newThroatAngle = motorAngle(x,y,w,h)
             newRNeckAngle = 90
             newLNeckAngle = 90
+
+
 
 
         # interpolate to these positions

@@ -1,43 +1,70 @@
 import cv2
+import time
 
-# Load the image from camera
-cap = cv2.VideoCapture(0)
+def motorAngle(x,y,w,h):
+    cameraResolution = (640, 480)
 
-# display the image
-while True:
-    ret, frame = cap.read()
+    allowedCrownAngle = (44, 140)
+    allowedThroatAngle = (80, 170)
 
-    # get size of the image
-    height, width = frame.shape[:2]
-    print(width, height) # 640 480
-
-    # JUST FINDING THE COORDINATES OF THE FACE
-    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
-    # print the coordinates of the face
-    print(faces) # [[x, y, w, h]]
-
-    for (x,y,w,h) in faces:
-        cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 2)
-        cv2.imshow('frame', frame)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        break
+    magicNumberX = (allowedCrownAngle[1]-allowedCrownAngle[0]) / cameraResolution[0]
+    magicNumberY = (allowedThroatAngle[1]-allowedThroatAngle[0]) / cameraResolution[1] 
 
 
 
-    # # ANOTHER OPTION...
-    # # seperate the image into squares
-    # for i in range(0, width, 100): # change the 100 according to the size of the image
-    #     for j in range(0, height, 100):
-    #         # get the square
-    #         square = frame[j:j+100, i:i+100]
+    newCrownAngle = (x*magicNumberX)+ allowedCrownAngle[0] + 0.5*w*magicNumberX
+    newThroatAngle = (allowedThroatAngle[1]-(y*magicNumberY)) -0.5*h*magicNumberY
 
-    #         # TODO: see if there is a face in this frame
+    print("New CrownAngle: " + str(newCrownAngle))
+    print("New ThroatAngle: " + str(newThroatAngle))
 
-    #         # display the square
-    #         cv2.imshow("Square", square)
-    #         cv2.waitKey(0)
-    #         cv2.destroyAllWindows()
+    return newCrownAngle, newThroatAngle
+
+    
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+
+def face_rec():
+
+    time.sleep(0.5)
+
+    # Load the image from camera
+    cap = cv2.VideoCapture(0)
+
+    # display the image
+    while True:
+        ret, frame = cap.read()
+
+        # get size of the image
+        height, width = frame.shape[:2]
+        print(width, height) # 640 480
+
+        # JUST FINDING THE COORDINATES OF THE FACE
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+
+        # print the coordinates of the face
+        print(faces) # [[x, y, w, h]]
+        faceX = 0
+        faceY = 0
+        faceW = 0
+        faceH = 0
+
+        for (x,y,w,h) in faces:
+            faceX = x
+            faceY = y
+            faceW = w
+            faceH = h
+
+        newC, newT = motorAngle(faceX, faceY, faceW, faceH)
+
+
+        # for (x,y,w,h) in faces:
+        #     cv2.rectangle(frame, (x,y), (x+w,y+h), (255,0,0), 2)
+        #     cv2.imshow('frame', frame)
+        #     cv2.waitKey(0)
+        #     cv2.destroyAllWindows()
+        #     break
+
+        return newC, newT
+
