@@ -2,9 +2,17 @@
 3D printed robot controlled programmatically. Summer school project [Currently Working...]
 
 
-## Todo
-### Head
-Make it able to detect faces and possibly recognise it, make the head point to where it detects the face
+### End goal
+Make it able to detect faces and detect it, make the head point to where it detects the face
 
-### Body / Arm
-Make it able to move the hand with a joystick in the 3D space, also add some pre-built moves
+
+
+# Firmware
+
+M5Burner:  https://static-cdn.m5stack.com/resource/software/M5Burner.zip
+CP2104 Driver: https://m5stack.oss-cn-shenzhen.aliyuncs.com/resource/drivers/CP210x_VCP_Windows.zip
+UIFlow-Desktop-IDE: https://static-cdn.m5stack.com/resource/software/UIFlow-Desktop-IDE.zip
+
+Maix-Py (UnitV): http://dl.sipeed.com/MAIX/MaixPy/ide/
+
+Others included in the firmware directory
