@@ -119,7 +119,11 @@ When following the person, if the person gets out of frame, make it seem like th
 
 
 23/08/2022
-
 Wrote the code to calculate the position the servos need to be moved for the person to be in the center of the frame of the robot’s eye (camera) accurately. Works of pc, needs testing on the actual robot.
 
 Unsure if able to install opencv in the m5stack
+
+the balljoint we melted onto the neck broke but we fixed it and it seems to be decently sturdy
+
+24/08/2022
+made the unitV ai camera work with maixpy but to comunicate with servos it needs to run on the m5stack and therefore needs to be written in UIflow. After multiple firmware flashes to the camera we were unsuccessful today at controlling the camera in UIfLow
