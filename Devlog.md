@@ -102,7 +102,10 @@ import upip
 Or just use what’s default available. 
 
 Draw a box with the boundaries of the head movement and then find coordinate of object in the box. Divide coordinate 
- 
+
+
+ ![unknown](https://user-images.githubusercontent.com/55021804/186471416-1877878c-1e22-4652-9919-e8a48787cc25.png)
+
 
 Servo values = [min value] + ([max-min] * [percentage from table])
 
