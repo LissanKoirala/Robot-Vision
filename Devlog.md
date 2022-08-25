@@ -127,3 +127,8 @@ the balljoint we melted onto the neck broke but we fixed it and it seems to be d
 
 24/08/2022
 made the unitV ai camera work with maixpy but to comunicate with servos it needs to run on the m5stack and therefore needs to be written in UIflow. After multiple firmware flashes to the camera we were unsuccessful today at controlling the camera in UIfLow
+
+25/08/2022
+we got the unitV camera to work with the m5stack in UIflow by flashing the m5stack with new UIflow_fire firmware with m5burner and integrated the code we wrote yesterday to get a basic debug program to output head position to theoretically look at a person.
+The ball joint casing broke so we couldnt test the program.
+todo: fix ball joint casing with hot glue and test code.
